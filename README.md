@@ -26,7 +26,7 @@ O **Sales Analytics Dashboard** é um projeto de Business Intelligence que centr
 
 - **Sazonalidade** — Black Friday, Natal, Dia das Mães, Dia dos Pais, Dia dos Namorados, Dia das Crianças
 - **Distribuição geográfica** — 10 filiais nas 5 regiões do Brasil
-- **Crescimento ano a ano** — 2026 apresenta um crescimento de $\approx$16% frente a 2025
+- **Crescimento ano a ano** — 2026 apresenta um crescimento de ~16% frente a 2025
 - **Comportamento de mercado** — canais digitais (site e marketplace) crescendo em relação a 2025
 
 | Dimensão         | Detalhe                                              |
