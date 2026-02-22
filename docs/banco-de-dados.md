@@ -126,11 +126,11 @@ erDiagram
 
 ```mermaid
 flowchart TD
-    CAT[🏷️ categories] -->|filtra| PROD[📦 products]
-    PROD -->|filtra| SALES[💰 sales]
-    STORES[🏪 stores] -->|filtra| SALES
-    EMP[👤 employees] -->|filtra| SALES
-    CAL[📅 dCalendario] -->|filtra| SALES
+    CAT(🏷️ categories) -->|filtra| PROD(📦 products)
+    PROD -->|filtra| SALES(💰 sales)
+    STORES(🏪 stores) -->|filtra| SALES
+    EMP(👤 employees) -->|filtra| SALES
+    CAL(📅 dCalendario) -->|filtra| SALES
 
     style SALES fill:#e74c3c,stroke:#c0392b,color:#fff
     style CAT fill:#3498db,stroke:#2980b9,color:#fff
@@ -367,6 +367,8 @@ CREATE INDEX idx_sales_store    ON sales(store_id);
 ### Distribuição de Vendas por Região (peso PIB)
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"pie1": "#3498db", "pie2": "#2ecc71", "pie3": "#f1c40f", "pie4": "#e67e22", "pie5": "#e74c3c", "pieTitleTextColor": "#ffffff", "pieLegendTextColor": "#ffffff", "pieSectionTextColor": "#ffffff"}}}%%
+
 pie title Distribuição de Vendas por Região
     "Sudeste (SP, RJ, MG)" : 42
     "Sul (PR, RS)" : 18
@@ -380,17 +382,17 @@ pie title Distribuição de Vendas por Região
 ```mermaid
 flowchart LR
     subgraph "📊 2025"
-        LF1["🏪 Loja Física<br/>46%"]
-        S1["🌐 Site<br/>21%"]
-        M1["📦 Marketplace<br/>17%"]
-        W1["📱 WhatsApp<br/>15%"]
+        LF1("🏪 Loja Física<br/> 46%")
+        S1("🌐 Site<br/> 21%")
+        M1("📦 Marketplace<br/> 17%")
+        W1("📱 WhatsApp<br/> 15%")
     end
 
     subgraph "📊 2026"
-        LF2["🏪 Loja Física<br/>36%"]
-        S2["🌐 Site<br/>33%"]
-        M2["📦 Marketplace<br/>18%"]
-        W2["📱 WhatsApp<br/>13%"]
+        LF2("🏪 Loja Física<br/> 36%")
+        S2("🌐 Site<br/> 33%")
+        M2("📦 Marketplace<br/> 18%")
+        W2("📱 WhatsApp<br/> 13%")
     end
 
     LF1 -->|"🔴 -10 p.p."| LF2
