@@ -8,15 +8,67 @@
 
 ## Índice
 
-1. [Visão Geral do Projeto](#1-visão-geral-do-projeto)
-2. [Screenshots do Dashboard](#2-screenshots-do-dashboard)
-3. [Arquitetura e Tecnologias](#3-arquitetura-e-tecnologias)
-4. [Estrutura do Repositório](#4-estrutura-do-repositório)
-5. [Modelagem de Dados](#5-modelagem-de-dados)
-6. [Páginas do Dashboard](#6-páginas-do-dashboard)
-7. [Principais Métricas e KPIs](#7-principais-métricas-e-kpis)
-8. [Como Reproduzir o Projeto](#8-como-reproduzir-o-projeto)
-9. [Documentação Adicional](#9-documentação-adicional)
+```mermaid
+flowchart LR
+  %% Nó Central
+  Root(("📑 Índice Navegação"))
+
+  %% Grupos Lógicos
+  G1["💡 Introdução"]
+  G2["⚙️ Engenharia"]
+  G3["📊 Business Intelligence"]
+  G4["🚀 Prática e Guias"]
+
+  %% Itens do Índice
+  I1["1. Visão Geral do Projeto"]
+  I2["2. Screenshots do Dashboard"]
+  I3["3. Arquitetura e Tecnologias"]
+  I4["4. Estrutura do Repositório"]
+  I5["5. Modelagem de Dados"]
+  I6["6. Estrutura do Dashboard"]
+  I7["7. Principais Métricas e KPIs"]
+  I8["8. Como Reproduzir o Projeto"]
+  I9["9. Documentação Adicional"]
+
+  %% Conexões
+  Root --> G1
+  Root --> G2
+  Root --> G3
+  Root --> G4
+
+  G1 --> I1
+  G1 --> I2
+  
+  G2 --> I3
+  G2 --> I4
+  G2 --> I5
+  
+  G3 --> I6
+  G3 --> I7
+  
+  G4 --> I8
+  G4 --> I9
+
+  %% Links de Navegação (Clicáveis)
+  click I1 "#1-visão-geral-do-projeto"
+  click I2 "#2-screenshots-do-dashboard"
+  click I3 "#3-arquitetura-e-tecnologias"
+  click I4 "#4-estrutura-do-repositório"
+  click I5 "#5-modelagem-de-dados"
+  click I6 "#6-estrutura-do-dashboard"
+  click I7 "#7-principais-métricas-e-kpis"
+  click I8 "#8-como-reproduzir-o-projeto"
+  click I9 "#9-documentação-adicional"
+
+  %% Estilização Elegante
+  classDef root fill:#0F172A,stroke:#F59E0B,stroke-width:3px,color:#FFFFFF,font-weight:bold;
+  classDef group fill:#1E293B,stroke:#3B82F6,stroke-width:2px,color:#93C5FD,font-weight:bold,rx:8,ry:8;
+  classDef item fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px,color:#334155,rx:5,ry:5,cursor:pointer;
+
+  class Root root;
+  class G1,G2,G3,G4 group;
+  class I1,I2,I3,I4,I5,I6,I7,I8,I9 item;
+```
 
 ---
 
@@ -29,15 +81,44 @@ O **Sales Analytics Dashboard** é um projeto de Business Intelligence que centr
 - **Crescimento ano a ano** — 2026 apresenta um crescimento de ~16% frente a 2025
 - **Comportamento de mercado** — canais digitais (site e marketplace) crescendo em relação a 2025
 
-| Dimensão         | Detalhe                                              |
-|------------------|------------------------------------------------------|
-| Período          | Jan/2025 – Dez/2026                                  |
-| Total de Vendas  | 1.000 registros                                      |
-| Produtos         | 40 itens em 8 categorias                             |
-| Lojas            | 10 filiais em 5 regiões                              |
-| Funcionários     | 30 colaboradores (Vendedor, Gerente, Supervisor)     |
-| Canais de Venda  | Loja Física, Site, Marketplace, WhatsApp             |
-| Formas Pagamento | PIX, Cartão de Crédito, Cartão de Débito, Boleto e Dinheiro |
+```mermaid
+flowchart LR
+  %% Nó Central
+  Root(("📊 Visão Geral<br>1.000 Vendas"))
+
+  %% Nós de Dimensão
+  D1["📅 Período"]
+  D2["📦 Produtos"]
+  D3["🏪 Lojas"]
+  D4["👥 Equipe"]
+  D5["🛒 Canais"]
+  D6["💳 Pagamentos"]
+
+  %% Nós de Detalhe
+  V1["Jan/2025 – Dez/2026"]
+  V2["40 itens em 8 categorias"]
+  V3["10 filiais em 5 regiões"]
+  V4["30 colaboradores<br>(Vendedor, Gerente, Supervisor)"]
+  V5["Loja Física, Site, Marketplace, WhatsApp"]
+  V6["PIX, Cartão (Crédito/Débito), Boleto, Dinheiro"]
+
+  %% Conexões
+  Root --- D1 --- V1
+  Root --- D2 --- V2
+  Root --- D3 --- V3
+  Root --- D4 --- V4
+  Root --- D5 --- V5
+  Root --- D6 --- V6
+
+  %% Paleta de Cores Elegante
+  classDef root fill:#1E293B,stroke:#F59E0B,stroke-width:4px,color:#FFFFFF,font-weight:bold;
+  classDef dim fill:#3B82F6,stroke:#2563EB,stroke-width:2px,color:#FFFFFF,font-weight:bold,rx:8,ry:8;
+  classDef val fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px,color:#334155,rx:5,ry:5;
+
+  class Root root;
+  class D1,D2,D3,D4,D5,D6 dim;
+  class V1,V2,V3,V4,V5,V6 val;
+```
 
 ---
 
@@ -66,17 +147,25 @@ O **Sales Analytics Dashboard** é um projeto de Business Intelligence que centr
 
 ## 3. Arquitetura e Tecnologias
 
-```
-PostgreSQL (Supabase)
-        │
-        │  Conector PostgreSQL nativo
-        ▼
-    Power BI Desktop
-        │
-        ├── Power Query (ETL)
-        ├── Modelo Estrela (Star Schema)
-        ├── Medidas DAX
-        └── Relatório .pbix
+```mermaid
+flowchart TD
+  classDef db fill:#316192,stroke:#3ECF8E,stroke-width:3px,color:#fff;
+  classDef pbi fill:#F2C811,stroke:#E6B800,stroke-width:3px,color:#000,font-weight:bold;
+  classDef item fill:#f4f6f8,stroke:#b0bec5,stroke-width:2px,color:#263238;
+
+  DB[(PostgreSQL <br> Supabase)]:::db
+  PBI{Power BI Desktop}:::pbi
+  
+  PQ(Power Query <br> ETL):::item
+  Model(Modelo Star Schema):::item
+  DAX(Medidas DAX):::item
+  Report(Relatório .pbix):::item
+
+  DB -- "Conector PostgreSQL nativo" --> PBI
+  PBI --> PQ
+  PBI --> Model
+  PBI --> DAX
+  PBI --> Report
 ```
 
 | Tecnologia     | Uso                                         |
@@ -91,36 +180,64 @@ PostgreSQL (Supabase)
 
 ## 4. Estrutura do Repositório
 
-```
-sales_analytics_dashboard/
-│
-├── assets/
-│   ├── icons/              # Ícones utilizados nos visuais do Power BI
-│   │   ├── revenue.png
-│   │   ├── sales.png
-│   │   ├── store.png
-│   │   ├── people.png
-│   │   └── ...             # 23 ícones no total
-│   │
-│   └── images/             # Screenshots do dashboard e diagrama ER
-│       ├── card_1.png
-│       ├── card_2.png
-│       ├── card_3.png
-│       └── table_relationship.png
-│
-├── data/
-│   ├── 01_create_tables.sql   # DDL: criação das tabelas e índices
-│   ├── 02_seed_dimensions.sql # DML: carga de categorias, lojas, funcionários e produtos
-│   ├── 03_seed_sales_v2.sql   # DML: geração probabilística de 1.000 vendas
-│   └── validation.sql         # Consultas de validação e análise exploratória
-│
-├── docs/
-│   ├── banco-de-dados.md      # Schema detalhado, dicionário de dados e relacionamentos
-│   ├── medidas-dax.md         # Todas as medidas DAX com explicação e sintaxe
-│   └── analises.md            # Análises de negócio e insights do dashboard
-│
-├── sales_analytics.pbix       # Arquivo do relatório Power BI (abrir no Power BI Desktop)
-└── README.md                  # Este arquivo
+```mermaid
+flowchart LR
+  Root["📁 sales_analytics_dashboard"]
+  
+  %% Pastas
+  Assets["📁 assets"]
+  Icons["🖼️ icons<br>Ícones dos visuais (23 itens)"]
+  Images["🖼️ images<br>Screenshots e Diagrama ER"]
+  
+  Data["📁 data"]
+  SQL1["📜 01_create_tables.sql<br>DDL: tabelas e índices"]
+  SQL2["📜 02_seed_dimensions.sql<br>DML: carga de dimensões"]
+  SQL3["📜 03_seed_sales_v2.sql<br>DML: 1.000 vendas"]
+  SQL4["📜 validation.sql<br>Consultas de validação"]
+  
+  Docs["📁 docs"]
+  Doc1["📄 banco-de-dados.md<br>Schema e dicionário"]
+  Doc2["📄 medidas-dax.md<br>Fórmulas e sintaxe"]
+  Doc3["📄 analises.md<br>Insights do negócio"]
+  
+  %% Arquivos na raiz
+  PBIX["📊 sales_analytics.pbix<br>Relatório Power BI"]
+  README["📄 README.md<br>Documentação principal"]
+  
+  %% Conexões
+  Root --> Assets
+  Root --> Data
+  Root --> Docs
+  Root --> PBIX
+  Root --> README
+  
+  Assets --> Icons
+  Assets --> Images
+  
+  Data --> SQL1
+  Data --> SQL2
+  Data --> SQL3
+  Data --> SQL4
+  
+  Docs --> Doc1
+  Docs --> Doc2
+  Docs --> Doc3
+  
+  %% Paleta de Cores e Estilização
+  classDef root fill:#1E293B,stroke:#0F172A,stroke-width:3px,color:#FFFFFF,font-weight:bold,rx:8,ry:8;
+  classDef folder fill:#3B82F6,stroke:#2563EB,stroke-width:2px,color:#FFFFFF,font-weight:bold,rx:6,ry:6;
+  classDef sql fill:#DCFCE7,stroke:#22C55E,stroke-width:2px,color:#166534,rx:4,ry:4;
+  classDef md fill:#F1F5F9,stroke:#94A3B8,stroke-width:2px,color:#334155,rx:4,ry:4;
+  classDef pbi fill:#FEF08A,stroke:#EAB308,stroke-width:2px,color:#854D0E,font-weight:bold,rx:4,ry:4;
+  classDef img fill:#F3E8FF,stroke:#A855F7,stroke-width:2px,color:#6B21A8,rx:4,ry:4;
+  
+  %% Aplicação das classes
+  class Root root;
+  class Assets,Data,Docs folder;
+  class Icons,Images img;
+  class SQL1,SQL2,SQL3,SQL4 sql;
+  class README,Doc1,Doc2,Doc3 md;
+  class PBIX pbi;
 ```
 
 ---
@@ -129,16 +246,31 @@ sales_analytics_dashboard/
 
 O modelo segue o padrão **Star Schema**, com a tabela `sales` como **fato central** e seis dimensões ao redor.
 
-![Diagrama de Relacionamento](assets/images/table_relationship.png)
+```mermaid
+flowchart LR
+  %% Definição da Paleta de Cores Elegante
+  classDef fact fill:#0F172A,stroke:#F59E0B,stroke-width:3px,color:#FFFFFF,font-weight:bold,rx:10,ry:10;
+  classDef dim fill:#1E293B,stroke:#3B82F6,stroke-width:2px,color:#F8FAFC,font-weight:bold,rx:8,ry:8;
+  classDef subdim fill:#334155,stroke:#0EA5E9,stroke-width:2px,color:#F8FAFC,font-weight:bold,rx:8,ry:8;
+  classDef edgeLabel fill:#1E293B,stroke:#CBD5E1,stroke-width:1px,color:#FFFFFF,font-weight:bold,font-size:12px;
 
-| Tabela       | Tipo       | Descrição                                             |
-|--------------|------------|-------------------------------------------------------|
-| `sales`      | Fato       | Registros de venda (1.000 linhas)                     |
-| `products`   | Dimensão   | 40 produtos com preço de venda e custo                |
-| `categories` | Dimensão   | 8 categorias de produtos                              |
-| `stores`     | Dimensão   | 10 filiais com estado e região                        |
-| `employees`  | Dimensão   | 30 funcionários com cargo e loja de lotação           |
-| `dCalendario` | Dimensão  | Tabela calendário para **time intelligence functions**|
+  %% Nó Central (Fato)
+  F_SALES(("📦 Fato: sales<br><span style='font-size:12px; font-weight:normal'>Registros de venda (1.000 linhas)</span>")):::fact
+
+  %% Nós de Dimensão
+  D_CALENDAR["📅 Dim: dCalendario<br><span style='font-size:12px; font-weight:normal'>Time intelligence functions</span>"]:::dim
+  D_STORES["🏪 Dim: stores<br><span style='font-size:12px; font-weight:normal'>10 filiais com estado e região</span>"]:::dim
+  D_EMPLOYEES["👥 Dim: employees<br><span style='font-size:12px; font-weight:normal'>30 funcionários com cargo e loja</span>"]:::dim
+  D_PRODUCTS["🛒 Dim: products<br><span style='font-size:12px; font-weight:normal'>40 produtos com preço e custo</span>"]:::dim
+  D_CATEGORIES["🏷️ Dim: categories<br><span style='font-size:12px; font-weight:normal'>8 categorias de produtos</span>"]:::subdim
+
+  %% Relacionamentos (Star Schema / Snowflake)
+  D_CALENDAR -- "1:N" --> F_SALES
+  D_STORES -- "1:N" --> F_SALES
+  D_EMPLOYEES -- "1:N" --> F_SALES
+  D_PRODUCTS -- "1:N" --> F_SALES
+  D_CATEGORIES -- "1:N" --> D_PRODUCTS
+```
 
 > Para o schema completo, dicionário de dados e scripts SQL, consulte [docs/banco-de-dados.md](docs/banco-de-dados.md).
 
@@ -175,31 +307,106 @@ Desempenho individual e por cargo:
 
 ### Medidas Base
 
-| KPI                | Fórmula DAX                                             | Formato     |
-|--------------------|--------------------------------------------------------|-------------|
-| Receita Bruta      | `SUMX(sales, unit_price_at_sale * quantity)`           | Moeda R$    |
-| Receita Líquida    | `Receita Bruta - Total Descontos`                      | Moeda R$    |
-| Custo Total        | `SUMX(sales, RELATED(cost_price) * quantity)`          | Moeda R$    |
-| Lucro Bruto        | `Receita Líquida - Custo Total`                        | Moeda R$    |
-| Margem Bruta %     | `DIVIDE(Lucro Bruto, Receita Líquida, 0)`              | Percentual  |
-| Ticket Médio       | `DIVIDE(Receita Líquida, Num Vendas, 0)`               | Moeda R$    |
+```mermaid
+flowchart TD
+  %% Definição de Classes (Paleta Elegante)
+  classDef kpi fill:#1E293B,stroke:#3B82F6,stroke-width:2px,color:#FFFFFF,font-weight:bold,rx:8,ry:8;
+  classDef calc fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px,color:#334155,rx:8,ry:8;
+  classDef result fill:#0F172A,stroke:#10B981,stroke-width:3px,color:#FFFFFF,font-weight:bold,rx:8,ry:8;
+  classDef alert fill:#FEF2F2,stroke:#EF4444,stroke-width:2px,color:#991B1B,rx:8,ry:8;
+
+  %% Nós de Cálculo Base
+  RB["💰 Receita Bruta<br><span style='font-size:12px; font-weight:normal'>SUMX(sales, price * qty)</span>"]:::calc
+  Desc["🔻 Total Descontos<br><span style='font-size:12px; font-weight:normal'>SUM(sales[discount])</span>"]:::alert
+  CT["📉 Custo Total<br><span style='font-size:12px; font-weight:normal'>SUMX(sales, cost * qty)</span>"]:::alert
+  NV["🛒 Num Vendas<br><span style='font-size:12px; font-weight:normal'>COUNTROWS(sales)</span>"]:::calc
+
+  %% Nós de Resultado (KPIs Principais)
+  RL["💵 Receita Líquida<br><span style='font-size:12px; font-weight:normal'>Receita Bruta - Descontos</span>"]:::result
+  LB["📈 Lucro Bruto<br><span style='font-size:12px; font-weight:normal'>Receita Líquida - Custo Total</span>"]:::result
+  
+  %% Nós de Proporção/Média
+  MB["📊 Margem Bruta %<br><span style='font-size:12px; font-weight:normal'>DIVIDE(Lucro Bruto, Receita Líquida)</span>"]:::kpi
+  TM["🏷️ Ticket Médio<br><span style='font-size:12px; font-weight:normal'>DIVIDE(Receita Líquida, Num Vendas)</span>"]:::kpi
+
+  %% Relacionamentos (Fluxo de Valor)
+  RB --> RL
+  Desc -.->|Subtrai| RL
+  
+  RL --> LB
+  CT -.->|Subtrai| LB
+  
+  LB --> MB
+  RL -.->|Base| MB
+  
+  RL --> TM
+  NV -.->|Divisor| TM
+```
 
 ### Medidas de Time Intelligence
+```mermaid
+flowchart LR
+  %% Definição de Classes (Paleta Elegante)
+  classDef root fill:#0F172A,stroke:#3B82F6,stroke-width:3px,color:#FFFFFF,font-weight:bold,rx:10,ry:10;
+  classDef kpi fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px,color:#334155,rx:8,ry:8;
+  classDef result fill:#1E293B,stroke:#10B981,stroke-width:3px,color:#FFFFFF,font-weight:bold,rx:8,ry:8;
 
-| KPI                     | Fórmula DAX                                              | Uso               |
-|-------------------------|----------------------------------------------------------|--------------------|
-| Crescimento YoY %       | `DIVIDE(Atual - Anterior, Anterior, BLANK())`            | Card KPI          |
-| Receita YTD             | `CALCULATE([Receita], DATESYTD(dCalendario[Data]))`      | Acumulado no ano  |
-| Receita Período Anterior| `CALCULATE([Receita], SAMEPERIODLASTYEAR(...))`          | Comparativo       |
+  %% Nós
+  Base(("📈 Receita<br>Atual")):::root
+  
+  YTD["📅 Receita YTD<br><span style='font-size:12px; font-weight:normal'>DATESYTD(dCalendario[Data])</span>"]:::kpi
+  LY["⏪ Período Anterior<br><span style='font-size:12px; font-weight:normal'>SAMEPERIODLASTYEAR(...)</span>"]:::kpi
+  
+  YOY["🚀 Crescimento YoY %<br><span style='font-size:12px; font-weight:normal'>DIVIDE(Atual - Anterior, Anterior)</span>"]:::result
+
+  %% Relacionamentos
+  Base --> YTD
+  Base --> LY
+  Base -.->|Atual| YOY
+  LY -.->|Anterior| YOY
+```
 
 ### Medidas de Ranking e Texto
 
-| KPI                       | Técnica DAX                                           | Uso                    |
-|---------------------------|------------------------------------------------------|------------------------|
-| Estado Top                | `ADDCOLUMNS + TOPN + MAXX`                           | Card de texto          |
-| Melhor Vendedor           | `ADDCOLUMNS + TOPN + MAXX`                           | Card de texto          |
-| Top 5 Vendedores          | `RANKX + ALLSELECTED + IF/BLANK`                     | Gráfico de linhas      |
-| Concentração Top Estado % | `MAXX(tabela virtual) / CALCULATE([Receita], ALL())` | Card de percentual     |
+```mermaid
+flowchart LR
+  %% Definição de Classes (Paleta Elegante)
+  classDef root fill:#0F172A,stroke:#8B5CF6,stroke-width:3px,color:#FFFFFF,font-weight:bold,rx:10,ry:10;
+  classDef kpi fill:#1E293B,stroke:#3B82F6,stroke-width:2px,color:#FFFFFF,font-weight:bold,rx:8,ry:8;
+  classDef dax fill:#F8FAFC,stroke:#94A3B8,stroke-width:2px,color:#334155,rx:8,ry:8;
+  classDef visual fill:#F0FDF4,stroke:#22C55E,stroke-width:2px,color:#166534,font-weight:bold,rx:8,ry:8;
+
+  Root(("🏆 Rankings<br>e Textos")):::root
+
+  %% Nós de KPI
+  K1["📍 Estado Top"]:::kpi
+  K2["🥇 Melhor Vendedor"]:::kpi
+  K3["👥 Top 5 Vendedores"]:::kpi
+  K4["🎯 Concentração Top Estado %"]:::kpi
+
+  %% Nós de DAX
+  D12["Técnica DAX:<br><span style='font-size:12px; font-weight:normal'>ADDCOLUMNS + TOPN + MAXX</span>"]:::dax
+  D3["Técnica DAX:<br><span style='font-size:12px; font-weight:normal'>RANKX + ALLSELECTED + IF/BLANK</span>"]:::dax
+  D4["Técnica DAX:<br><span style='font-size:12px; font-weight:normal'>MAXX(tabela virtual) / CALCULATE(ALL)</span>"]:::dax
+
+  %% Nós de Uso (Visual)
+  V12["Uso:<br><span style='font-size:12px; font-weight:normal'>Card de Texto</span>"]:::visual
+  V3["Uso:<br><span style='font-size:12px; font-weight:normal'>Gráfico de Linhas</span>"]:::visual
+  V4["Uso:<br><span style='font-size:12px; font-weight:normal'>Card de Percentual</span>"]:::visual
+
+  %% Conexões
+  Root --> K1
+  Root --> K2
+  Root --> K3
+  Root --> K4
+
+  K1 --> D12
+  K2 --> D12
+  D12 --> V12
+
+  K3 --> D3 --> V3
+  K4 --> D4 --> V4
+```
 
 > Para todas as fórmulas DAX completas e comentadas, consulte [docs/medidas-dax.md](docs/medidas-dax.md).
 
@@ -242,15 +449,31 @@ Execute o script de validação para confirmar que a carga foi bem-sucedida:
 \i data/validation.sql
 ```
 
-Resultados esperados:
+**Resultados esperados:**
 
-| Verificação                  | Valor esperado |
-|------------------------------|----------------|
-| Total de vendas              | 1.000          |
-| Vendas em 2025               | ~480           |
-| Vendas em 2026               | ~520           |
-| Lojas distintas              | 10             |
-| Produtos distintos           | 40             |
+```mermaid
+flowchart LR
+  %% Definição de Classes (Paleta Elegante)
+  classDef root fill:#0F172A,stroke:#10B981,stroke-width:3px,color:#FFFFFF,font-weight:bold,rx:10,ry:10;
+  classDef metric fill:#1E293B,stroke:#3B82F6,stroke-width:2px,color:#FFFFFF,font-weight:bold,rx:8,ry:8;
+  classDef submetric fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px,color:#334155,font-weight:bold,rx:8,ry:8;
+
+  %% Nós
+  Root(("🎯 Resultados<br>Esperados")):::root
+  
+  Vendas["📦 Total de Vendas<br><span style='font-size:18px; color:#34D399'>1.000</span>"]:::metric
+  Ano25["📅 Vendas em 2025<br><span style='font-size:16px; color:#2563EB'>~480</span>"]:::submetric
+  Ano26["📅 Vendas em 2026<br><span style='font-size:16px; color:#2563EB'>~520</span>"]:::submetric
+  Lojas["🏪 Lojas Distintas<br><span style='font-size:18px; color:#34D399'>10</span>"]:::metric
+  Prods["🛒 Produtos Distintos<br><span style='font-size:18px; color:#34D399'>40</span>"]:::metric
+
+  %% Conexões
+  Root --> Vendas
+  Vendas --> Ano25
+  Vendas --> Ano26
+  Root --> Lojas
+  Root --> Prods
+```
 
 ---
 
