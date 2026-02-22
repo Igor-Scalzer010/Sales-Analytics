@@ -215,7 +215,7 @@ DIVIDE(
 
 ## 6. Medidas de Inteligência de Tempo (YoY)
 
-> **Pré-requisito:** tabela `dCalendario` com relacionamento ativo com `sales[sale_date_only]`.
+> **Pré-requisito:** tabela `dCalendario` com relacionamento ativo com `sales[sale_date]`.
 
 ### `Receita Liquida AA`
 
