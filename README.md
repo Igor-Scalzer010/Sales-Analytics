@@ -119,14 +119,41 @@ flowchart TD
   PBI --> DAX
   PBI --> Report
 ```
+## 3.1 Tecnologias Utilizadas
 
-| Tecnologia     | Uso                                         |
-|----------------|---------------------------------------------|
-| PostgreSQL     | Banco de dados relacional (Supabase)        |
-| Supabase       | plataforma de banco de dados gerenciado     |
-| Power BI Desktop | Modelagem, DAX e visualizações            |
-| Power Query (M) | Transformações e limpeza de dados          |
-| DAX            | Medidas e colunas calculadas               |
+```mermaid
+flowchart LR
+  %% Definição de Classes (Paleta Elegante)
+  classDef root fill:#1E293B,stroke:#3B82F6,stroke-width:3px,color:#FFFFFF,font-weight:bold,rx:10,ry:10;
+  classDef groupDB fill:#064E3B,stroke:#10B981,stroke-width:2px,color:#FFFFFF,font-weight:bold,rx:8,ry:8;
+  classDef groupBI fill:#78350F,stroke:#F59E0B,stroke-width:2px,color:#FFFFFF,font-weight:bold,rx:8,ry:8;
+  classDef item fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px,color:#334155,rx:8,ry:8;
+
+  Root(("🛠️ Stack")):::root
+
+  %% Nós de Categoria
+  DB["🗄️ Banco de Dados"]:::groupDB
+  BI["📊 Business Intelligence"]:::groupBI
+
+  %% Nós de Detalhe
+  PG["PostgreSQL<br><span style='font-size:12px; font-weight:normal'>Banco de dados relacional</span>"]:::item
+  SB["Supabase<br><span style='font-size:12px; font-weight:normal'>Plataforma gerenciada</span>"]:::item
+  
+  PB["Power BI Desktop<br><span style='font-size:12px; font-weight:normal'>Modelagem e visualizações</span>"]:::item
+  PQ["Power Query (M)<br><span style='font-size:12px; font-weight:normal'>ETL</span>"]:::item
+  DX["DAX<br><span style='font-size:12px; font-weight:normal'>Medidas e colunas calculadas</span>"]:::item
+
+  %% Conexões
+  Root --> DB
+  Root --> BI
+
+  DB --> PG
+  DB --> SB
+
+  BI --> PB
+  BI --> PQ
+  BI --> DX
+```
 
 ---
 
@@ -449,13 +476,39 @@ Ou, para construir do zero a partir das tabelas:
 ### Passo 4 — Transformações no Power Query
 
 Após carregar as tabelas, aplique no **Power Query Editor**:
+```mermaid
+flowchart LR
+  %% Definição de Classes (Paleta Elegante)
+  classDef root fill:#1E293B,stroke:#F2C811,stroke-width:3px,color:#FFFFFF,font-weight:bold,rx:10,ry:10;
+  classDef table fill:#3B82F6,stroke:#2563EB,stroke-width:2px,color:#FFFFFF,font-weight:bold,rx:8,ry:8;
+  classDef action fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px,color:#334155,rx:8,ry:8;
 
-| Tabela       | Transformação                                                     |
-|--------------|-------------------------------------------------------------------|
-| `sales`      | Coluna `sale_date`: alterar tipo para `Data/Hora` (sem fuso)     |
-| `sales`      | Adicionar coluna `sale_date_only`: Adicionar Coluna → Data → Somente Data |
-| `employees`  | Confirmar `birth_date` e `hire_date` como tipo `Data`            |
-| Todas        | Confirmar colunas `id` e FKs como `Número Inteiro`              |
+  %% Nó Central
+  PQ(("⚙️ Power Query<br><span style='font-size:12px; font-weight:normal'>Transformações (ETL)</span>")):::root
+
+  %% Tabelas
+  T_SALES["📦 Tabela: sales"]:::table
+  T_EMP["👥 Tabela: employees"]:::table
+  T_ALL["🗂️ Todas as Tabelas"]:::table
+
+  %% Transformações
+  A_S1["🕒 Alterar <b>sale_date</b><br><span style='font-size:12px'>Tipo: Data/Hora (sem fuso)</span>"]:::action
+  A_S2["📅 Alterar <b>sale_date</b><br><span style='font-size:12px'>Tipo de dado → Data → Somente Data</span>"]:::action
+  A_E1["🎂 Confirmar <b>birth_date</b> e <b>hire_date</b><br><span style='font-size:12px'>Tipo: Data</span>"]:::action
+  A_ALL["🔢 Confirmar <b>id</b> e <b>FKs</b><br><span style='font-size:12px'>Tipo: Número Inteiro</span>"]:::action
+
+  %% Conexões
+  PQ --> T_SALES
+  PQ --> T_EMP
+  PQ --> T_ALL
+
+  T_SALES --> A_S1
+  T_SALES --> A_S2
+  
+  T_EMP --> A_E1
+  
+  T_ALL --> A_ALL
+```
 
 
 > **Dica:** Crie também uma tabela calendário (`dCalendario`) para habilitar funções de time intelligence no DAX.
