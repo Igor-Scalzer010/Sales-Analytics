@@ -30,15 +30,15 @@ O dashboard responde a três perguntas estratégicas centrais:
 ```mermaid
 flowchart LR
     subgraph "🎯 Perguntas Estratégicas"
-        P1["A empresa está<br/>crescendo?"]
-        P2["Quais produtos/canais<br/>são mais rentáveis?"]
-        P3["Onde estão os vetores<br/>de crescimento?"]
+        P1("A empresa está<br/>crescendo?")
+        P2("Quais produtos<br/>são mais rentáveis?")
+        P3("Onde estão os vetores<br/>de crescimento?")
     end
 
     subgraph "📊 Respostas do Dashboard"
-        R1["✅ +16% YoY<br/>(volume + preço)"]
-        R2["✅ Smartphones e<br/>Notebooks lideram receita<br/>Acessórios lideram margem"]
-        R3["✅ Canais digitais<br/>58% → 65%"]
+        R1("✅ +16% YoY<br/>(volume + preço)")
+        R2("✅ Smartphones e<br/>Notebooks lideram receita<br/>Acessórios lideram margem")
+        R3("✅ Canais digitais<br/>21% de crescimento na receita<br/>Sudeste é a maior parte da receita")
     end
 
     P1 --> R1
@@ -55,13 +55,13 @@ flowchart LR
 
 ### KPIs Consolidados
 
+
 | KPI                       | 2025           | 2026           | Variação    |
 |---------------------------|----------------|----------------|-------------|
-| Total de Vendas           | ~480           | ~520           | +8%         |
+| Total de Vendas           | ~485           | ~515           | +6%         |
 | Receita Líquida           | ~R$ 1,22M      | ~R$ 1,42M      | +16%        |
-| Ticket Médio              | ~R$ 2,5K       | ~R$ 2,7K       | ↑ (+inflação)|
-| % Canal Digital           | ~58%           | ~65%           | ↑ +7 p.p.  |
-| Margem Bruta Média        | ~33%           | ~34%           | ↑ (+preço sem ↑custo) |
+| Ticket Médio              | ~R$ 2,5K       | ~R$ 2,7K       | +9%         |
+| Margem Bruta Média        | ~32%           | ~35%           | ↑ +3 p.p.   |
 
 ---
 
@@ -79,26 +79,15 @@ xychart-beta
     bar [6, 6, 7, 7, 8, 8, 8, 8, 8, 8, 13, 13]
 ```
 
-**Picos de vendas identificados:**
-
-| Mês       | Evento              | Impacto                                   |
-|-----------|---------------------|-------------------------------------------|
-| Maio      | Dia das Mães        | +10–15% vs meses adjacentes               |
-| Junho     | Dia dos Namorados   | +10% — fones, acessórios, smartphones     |
-| Agosto    | Dia dos Pais        | +10% — eletrônicos premium                |
-| Outubro   | Dia das Crianças    | +10% — tablets, fones, gadgets            |
-| Novembro  | **Black Friday**    | **+80–100%** vs média mensal              |
-| Dezembro  | **Natal**           | **+80–100%** vs média mensal              |
-
 **Janeiro e Fevereiro** são os meses de menor volume (efeito pós-festas + comprometimento de renda com início de ano). São períodos ideais para revisão de estoque e planejamento de promoções.
 
 ### 2.2 Composição do Crescimento YoY
 
 ```mermaid
 flowchart LR
-    TOTAL["📈 Crescimento Total<br/>~16%"]
-    VOL["📦 Volume<br/>+8% mais transações"]
-    PRECO["💰 Preço<br/>+4–6% inflação simulada"]
+    TOTAL("📈 Crescimento Total<br/>~16%")
+    VOL("📦 Volume<br/>+8% mais transações")
+    PRECO("💰 Preço<br/>+4–6% inflação simulada")
 
     VOL --> TOTAL
     PRECO --> TOTAL
@@ -108,77 +97,33 @@ flowchart LR
     style PRECO fill:#f39c12,stroke:#e67e22,color:#fff
 ```
 
-> **Insight importante:** Ao analisar crescimento YoY, é essencial separar **crescimento real (volume)** de **crescimento nominal (preço)**. Sem essa distinção, o analista pode superestimar o desempenho da empresa.
+> **Insight importante:** Ao analisar crescimento YoY, é essencial separar **crescimento real (volume)** de **crescimento nominal (preço)**. Sem essa distinção, podemos superestimar a saúde do negócio se o aumento de receita for apenas efeito de inflação.
 
 ### 2.3 Visuais no Dashboard
 
-| Visual                          | Tipo              | Configuração                                        |
-|---------------------------------|-------------------|-----------------------------------------------------|
-| Receita Mensal 2025 vs 2026     | Gráfico de Linhas | Eixo X: MesAbrev, Legenda: Ano                     |
-| Crescimento YoY %               | Cartão KPI        | Medida com `SAMEPERIODLASTYEAR` + seta condicional |
-| Evolução Top 5 Vendedores       | Gráfico de Linhas | Medida `RANKX + ALLSELECTED` para filtrar dinâmico |
+| Visual                          | Tipo              | Configuração                                                 |
+|---------------------------------|-------------------|--------------------------------------------------------------|
+| Receita Mensal 2025 vs 2026     | Gráfico de Linhas | Eixo X: MesAbrev                                             |
+| Crescimento YoY %               | Cartão KPI        | Medida com `SAMEPERIODLASTYEAR` + seta condicional           |
+| Evolução Top 5 Vendedores       | Gráfico de Linhas | Medida `RANKX + ALLSELECTED` para filtrar de forma dinâmica  |
 
 ---
 
 ## 3. Análise de Produtos e Categorias
 
-### 3.1 Participação por Categoria na Receita
-
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"pie1": "#3498db", "pie2": "#2ecc71", "pie3": "#f1c40f", "pie4": "#e67e22", "pie5": "#e74c3c", "pie6": "#983abd", "pie7": "#bc1a86", "pie8": "#573fdf", "pieTitleTextColor": "#ffffff", "pieLegendTextColor": "#ffffff", "pieSectionTextColor": "#ffffff"}}}%%
+
 pie title Distribuição de Receita por Categoria
-    "Smartphones" : 25
-    "Notebooks e Laptops" : 20
-    "Acessórios e Periféricos" : 12
-    "Televisores" : 12
-    "Áudio e Fones" : 10
-    "Eletrodomésticos" : 9
-    "Computadores Desktop" : 7
-    "Armazenamento" : 5
+    "Smartphones" : 31
+    "Notebooks e Laptops" : 23
+    "Acessórios e Periféricos" : 3
+    "Televisores" : 15
+    "Áudio e Fones" : 5
+    "Eletrodomésticos" : 5
+    "Computadores Desktop" : 17
+    "Armazenamento" : 2
 ```
-
-### 3.2 Matriz Volume × Margem por Categoria
-
-```mermaid
-quadrantChart
-    title Posicionamento das Categorias (Volume vs Margem)
-    x-axis "Baixo Volume" --> "Alto Volume"
-    y-axis "Baixa Margem" --> "Alta Margem"
-    quadrant-1 "⭐ Estrela"
-    quadrant-2 "💰 Margem Alta"
-    quadrant-3 "⚠️ Revisar"
-    quadrant-4 "📦 Volume"
-    "Smartphones": [0.85, 0.40]
-    "Notebooks": [0.60, 0.30]
-    "Acessórios": [0.70, 0.80]
-    "Armazenamento": [0.50, 0.80]
-    "Áudio e Fones": [0.45, 0.60]
-    "Televisores": [0.40, 0.35]
-    "Eletrodomésticos": [0.30, 0.40]
-    "Desktop": [0.25, 0.35]
-```
-
-**Interpretação dos quadrantes:**
-
-| Quadrante       | Categorias                | Estratégia                                      |
-|-----------------|---------------------------|-------------------------------------------------|
-| ⭐ Estrela     | Acessórios, Armazenamento | Alto volume E alta margem — **maximizar**       |
-| 💰 Margem Alta | Áudio e Fones             | Boa margem, aumentar volume                     |
-| 📦 Volume      | Smartphones, Notebooks    | Alto volume, margem menor — **atrair clientes** |
-| ⚠️ Revisar     | Desktop, Eletrodomésticos | Baixo volume e margem — reavaliar mix           |
-
-**Insight estratégico:** Produtos de alto ticket (smartphones, notebooks) servem como **âncora** para atrair clientes. Acessórios e periféricos maximizam a margem por venda. A combinação de ambos é a estratégia ótima.
-
-### 3.3 Destaques de Margem
-
-| Produto                       | Preço (R$) | Custo (R$) | Margem  | Categoria     |
-|-------------------------------|:----------:|:----------:|:-------:|---------------|
-| Cabo HDMI 2.1                 | 49,90      | 18,00      | **63,9%** | Acessórios  |
-| Pen Drive Kingston 64GB       | 39,90      | 15,00      | **62,4%** | Armazenamento|
-| Mouse Pad Gamer               | 79,90      | 30,00      | **62,5%** | Acessórios  |
-| MacBook Air M2                | 8.999      | 6.500      | 27,8%   | Notebooks     |
-| Notebook Dell Inspiron        | 2.599      | 1.900      | 26,9%   | Notebooks     |
-
-> O MacBook Air M2 tem margem de apenas 27,8%, enquanto um Cabo HDMI tem 63,9%. Mas o MacBook gera R$ 2.499 de lucro bruto por unidade vs R$ 31,90 do cabo. **Margem percentual e lucro absoluto são métricas complementares**.
 
 ---
 
@@ -187,15 +132,15 @@ quadrantChart
 ### 4.1 Distribuição por Região
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"pie1": "#3498db", "pie2": "#2ecc71", "pie3": "#f1c40f", "pie4": "#e67e22", "pie5": "#e74c3c", "pieTitleTextColor": "#ffffff", "pieLegendTextColor": "#ffffff", "pieSectionTextColor": "#ffffff"}}}%%
+
 pie title Participação na Receita por Região
-    "Sudeste (SP, RJ, MG)" : 45
-    "Sul (PR, RS)" : 17
-    "Nordeste (PE, BA)" : 16
-    "Centro-Oeste (DF, GO)" : 14
+    "Sudeste (SP, RJ, MG)" : 41
+    "Sul (PR, RS)" : 20
+    "Nordeste (PE, BA)" : 17
+    "Centro-Oeste (DF, GO)" : 15
     "Norte (AM)" : 8
 ```
-
-A distribuição segue o **PIB regional brasileiro**, o que torna os dados realistas para análise.
 
 ### 4.2 Análise de Concentração Geográfica
 
@@ -209,16 +154,7 @@ A medida `Concentracao Top Estado %` foi criada para avaliar o **risco de depend
 
 **No nosso dashboard:** SP representa ~18% da receita → empresa tem boa distribuição ✅
 
-> **Por que isso importa?** Se uma empresa depende 50%+ de um único estado, uma crise econômica local pode derrubar metade do faturamento. Essa análise demonstra **pensamento estratégico** e é valorizada em entrevistas.
-
-### 4.3 Visuais no Dashboard
-
-| Visual                         | Tipo                     | Insight                                   |
-|--------------------------------|--------------------------|-------------------------------------------|
-| Receita por Estado             | Barras Horizontais       | Ranking de faturamento por UF             |
-| Mapa do Brasil                 | Mapa/Filled Map          | Distribuição geográfica visual            |
-| Tabela com formatação cond.    | Tabela                   | Margem % com cores (🟢🟡🔴)              |
-| Receita por Canal (2025 vs 2026)| Barras Empilhadas       | Evolução digital por canal                |
+> **Por que isso importa?** Se uma empresa depende +50% de um único estado, uma crise econômica local pode derrubar metade do faturamento. Diversificar geograficamente é uma estratégia de mitigação de risco.
 
 ---
 
@@ -227,54 +163,46 @@ A medida `Concentracao Top Estado %` foi criada para avaliar o **risco de depend
 ### 5.1 Evolução do Canal Físico vs Digital
 
 ```mermaid
+%%{init: {"themeVariables": {"xyChart": {"plotColorPalette": "#3498db,#27ae60"}}}}%%
 xychart-beta
     title "Participação dos Canais de Venda (%)"
     x-axis ["Loja Física", "Site", "Marketplace", "WhatsApp"]
     y-axis "Participação (%)" 0 --> 50
-    bar [42, 26, 16, 16]
-    bar [35, 30, 20, 15]
+    bar [41, 25, 16, 18]
+    bar [38, 29, 19, 14]
 ```
 
-> 🟦 = 2025 | 🟧 = 2026
+> 🟦 = 2025 | 🟩 = 2026
 
 | Canal       | 2025  | 2026  | Variação  | Tendência |
 |-------------|:-----:|:-----:|:---------:|:---------:|
-| Loja Física | 42%   | 35%   | -7 p.p.   | ↓         |
-| Site        | 26%   | 30%   | +4 p.p.   | ↑         |
-| Marketplace | 16%   | 20%   | +4 p.p.   | ↑         |
-| WhatsApp    | 16%   | 15%   | -1 p.p.   | →         |
-| **Digital** | **58%**| **65%**| **+7 p.p.**| **↑**  |
+| Loja Física | 41%   | 38%   | -3 p.p.   | ↓         |
+| Site        | 25%   | 29%   | +4 p.p.   | ↑         |
+| Marketplace | 16%   | 19%   | +3 p.p.   | ↑         |
+| WhatsApp    | 18%   | 14%   | -4 p.p.   | ↓         |
+| **Digital** | **59%**| **62%**| **+3 p.p.**| **↑**  |
+
+> **Insight:** Os canais digitais (Website, Marketplace, WhatsApp) estão crescendo, enquanto o canal físico está em queda. Isso reflete a tendência global de migração para o digital, mas também destaca a necessidade de investir em experiência online e logística para capturar esse crescimento. O canal do **WhatsApp** é um caso interessante — apesar de ser um canal digital, sua participação caiu, possivelmente devido à preferência por compras autônomas no site ou marketplace, mas os outros canais digitais compensaram essa queda.
 
 ### 5.2 Implicações Estratégicas
 
 ```mermaid
 flowchart TD
-    TENDENCIA["📈 Canais digitais: 58% → 65%"]
+    TENDENCIA("📈 Canais digitais: 59% → 62%")
 
-    TENDENCIA --> A["🏪 Loja Física em queda"]
-    TENDENCIA --> B["🌐 Site e Marketplace crescendo"]
-    TENDENCIA --> C["📱 WhatsApp estável"]
+    TENDENCIA --> A("🏪 Loja Física em queda")
+    TENDENCIA --> B("🌐 Site e Marketplace crescendo")
+    TENDENCIA --> C("📱 WhatsApp leve queda<br/>-4 p.p")
 
-    A --> A1["💡 Revisar custo operacional<br/>das filiais físicas"]
-    B --> B1["💡 Investir em logística<br/>e experiência digital"]
-    C --> C1["💡 Manter atendimento<br/>personalizado"]
+    A --> A1("💡 Revisar custo operacional<br/>das filiais físicas")
+    B --> B1("💡 Investir em logística<br/>e experiência digital")
+    C --> C1("💡 Oferecer um atendimento mais<br/>personalizado")
 
     style TENDENCIA fill:#e74c3c,stroke:#c0392b,color:#fff
     style A fill:#f39c12,stroke:#e67e22,color:#fff
     style B fill:#27ae60,stroke:#1e8449,color:#fff
     style C fill:#3498db,stroke:#2980b9,color:#fff
 ```
-
-### 5.3 Ticket Médio por Canal
-
-Tipicamente:
-
-| Canal          | Ticket Médio   | Motivo                                      |
-|----------------|:--------------:|---------------------------------------------|
-| Loja Física    | **Mais alto**  | Consultor presencial guia compras maiores   |
-| WhatsApp       | Alto           | Atendimento personalizado, upsell           |
-| Site           | Médio          | Navegação autônoma                          |
-| Marketplace    | **Mais baixo** | Compradores focados em preço                |
 
 ---
 
@@ -283,21 +211,22 @@ Tipicamente:
 ### 6.1 Distribuição
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"pie1": "#3498db", "pie2": "#2ecc71", "pie3": "#f1c40f", "pie4": "#e67e22", "pie5": "#e74c3c", "pieTitleTextColor": "#ffffff", "pieLegendTextColor": "#ffffff", "pieSectionTextColor": "#ffffff"}}}%%
 pie title Formas de Pagamento (% das transações)
-    "PIX" : 35
-    "Cartão de Crédito" : 30
-    "Cartão de Débito" : 15
-    "Boleto" : 12
-    "Dinheiro" : 8
+    "PIX" : 40
+    "Cartão de Crédito" : 28
+    "Cartão de Débito" : 13
+    "Boleto" : 11
+    "Dinheiro" : 7
 ```
 
 | Método         | Participação | Perfil de Compra                                |
 |----------------|:------------:|-------------------------------------------------|
-| PIX            | ~35%         | Compras digitais, desconto à vista              |
-| Cartão Crédito | ~30%         | Parcelamento — alto ticket (smartphones, notebooks) |
-| Cartão Débito  | ~15%         | Compras presenciais de menor valor              |
-| Boleto         | ~12%         | Compras B2B e clientes sem cartão               |
-| Dinheiro       | ~8%          | **Exclusivo de loja física**                    |
+| PIX            | ~40%         | Compras digitais, desconto à vista              |
+| Cartão Crédito | ~28%         | Parcelamento — alto ticket (smartphones, notebooks) |
+| Cartão Débito  | ~13%         | Compras presenciais de menor valor              |
+| Boleto         | ~11%         | Compras B2B e clientes sem cartão               |
+| Dinheiro       | ~7%          | **Exclusivo de loja física**                    |
 
 ### 6.2 Regra de Negócio Validável
 
@@ -331,6 +260,8 @@ GROUP BY sales_channel;
 O gráfico de dispersão **Quantidade de Vendas vs Ticket Médio** classifica cada vendedor em um dos 4 perfis:
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"quadrant1Fill": "#e8f8f5", "quadrant2Fill": "#ebf5fb", "quadrant3Fill": "#fdedec", "quadrant4Fill": "#fef9e7", "quadrant1TextFill": "#27ae60", "quadrant2TextFill": "#3498db", "quadrant3TextFill": "#e74c3c", "quadrant4TextFill": "#f39c12", "quadrantPointFill": "#2c3e50", "quadrantPointTextFill": "#104c85", "quadrantTitleFill": "#ffffff", "quadrantXAxisTextFill": "#ffffff", "quadrantYAxisTextFill": "#ffffff"}}}%%
+
 quadrantChart
     title Perfil de Vendedores (Volume vs Ticket)
     x-axis "Poucas Vendas" --> "Muitas Vendas"
@@ -350,12 +281,12 @@ quadrantChart
 
 **Ação por quadrante:**
 
-| Quadrante      | Perfil                     | Ação do Gestor                              |
-|----------------|----------------------------|---------------------------------------------|
+| Quadrante      | Perfil                     | Ação do Gestor                               |
+|----------------|----------------------------|----------------------------------------------|
 | ⭐ Estrela     | Muitas vendas + ticket alto | Bonificar, usar como mentor                |
 | 🎯 Consultivo  | Poucas vendas + ticket alto | Treinar para aumentar volume               |
 | 📦 Volume      | Muitas vendas + ticket baixo| Treinar para upsell (vender mais caro)     |
-| ⚠️ Atenção     | Poucas vendas + ticket baixo| Acompanhamento urgente, treinamento        |
+| ⚠️ Atenção     | Poucas vendas + ticket baixo| Necessita de acompanhamento e treinamento  |
 
 > **Configuração no Power BI:**
 > - Eixo X: `[Num Vendas]`
@@ -372,17 +303,7 @@ O gráfico de linhas mostra a evolução mensal dos 5 melhores vendedores, respo
 - *"Algum vendedor está em tendência de queda?"*
 - *"Tem sazonalidade no desempenho individual?"*
 
-**Desafio técnico resolvido:** Filtrar o gráfico para mostrar apenas 5 vendedores usando `RANKX + ALLSELECTED` (ver [Seção 10](#10-desafios-técnicos-e-soluções)).
-
-### 7.4 Cards KPI da Página
-
-| Card                           | Medida DAX                    | Técnica                               |
-|--------------------------------|-------------------------------|---------------------------------------|
-| 👥 Total Funcionários          | `COUNTROWS(employees)`        | Contagem simples                      |
-| 🏆 Melhor Vendedor (texto)     | `ADDCOLUMNS + TOPN + MAXX`   | Tabela virtual → extração de texto    |
-| 💰 Receita por Funcionário     | `DIVIDE + DISTINCTCOUNT`      | Divisão segura                        |
-| 📊 Média Vendas/Funcionário    | `DIVIDE + DISTINCTCOUNT`      | Reutilização de medidas (DRY)         |
-| 🎟️ Ticket Médio por Vendedor  | `DIVIDE(Receita/Func, Vendas/Func)` | Composição de medidas           |
+**Modelagem:** Filtrar o gráfico para mostrar apenas 5 vendedores usando `RANKX + ALLSELECTED` (ver [Seção 10](#10-desafios-técnicos-e-soluções)).
 
 ---
 
@@ -392,12 +313,12 @@ O gráfico de linhas mostra a evolução mensal dos 5 melhores vendedores, respo
 
 ```mermaid
 flowchart TD
-    RB["💵 Receita Bruta<br/>(unit_price × quantity)"]
-    DESC["🏷️ Total Descontos"]
-    RL["💰 Receita Líquida<br/>(Bruta - Descontos)"]
-    CT["📦 Custo Total<br/>(cost_price × quantity)"]
-    LB["📊 Lucro Bruto<br/>(Líquida - Custo)"]
-    MB["📈 Margem Bruta %<br/>(Lucro / Receita Líquida)"]
+    RB("💵 Receita Bruta<br/>(unit_price × quantity)")
+    DESC("🏷️ Total Descontos")
+    RL("💰 Receita Líquida<br/>(Bruta - Descontos)")
+    CT("📦 Custo Total<br/>(cost_price × quantity)")
+    LB("📊 Lucro Bruto<br/>(Líquida - Custo)")
+    MB("📈 Margem Bruta %<br/>(Lucro / Receita Líquida)")
 
     RB -->|menos| DESC
     DESC -->|igual| RL
@@ -416,34 +337,18 @@ flowchart TD
 
 ### 8.2 Impacto dos Descontos por Período
 
-| Período                  | Sem desconto | Desconto médio (com desconto) | Impacto na Margem |
-|--------------------------|:------------:|:-----------------------------:|:------------------:|
-| Meses normais            | 55%          | 2–6%                          | Mínimo             |
-| Datas comemorativas      | 40%          | 2–10%                         | Leve compressão    |
-| **Black Friday / Natal** | 25%          | 3–15%                         | **Reduz margem ~3–5 p.p.** |
+| Período                  | Desconto médio (com desconto) | Impacto na Margem          |
+|--------------------------|:-----------------------------:|:--------------------------:|
+| Meses normais            | 2–6%                          | Mínimo                     |
+| Datas comemorativas      | 2–10%                         | Leve compressão            |
+| **Black Friday / Natal** | 3–15%                         | **Reduz margem ~3–5 p.p.** |
 
-### 8.3 Margem por Período
 
-```
-Jan–Out:  Margem Bruta ~35–38%
-Nov–Dez:  Margem Bruta ~30–34% (descontos mais agressivos)
-```
-
-**Análise recomendada:**
-- Comparar `Desconto % sobre Receita Bruta` em novembro vs média do ano
-- Verificar se o **aumento de volume** em Black Friday compensa a compressão de margem
-- Identificar produtos com desconto excessivo
-
-### 8.4 Efeito do Reajuste de Preços 2026
+### 8.3 Efeito do Reajuste de Preços 2026
 
 O script SQL aplica reajuste de +4% a +6% nos preços de 2026, mas o custo permanece o mesmo:
 
-```
-Preço 2026 = Preço 2025 × 1,05 (média)
-Custo 2026 = Custo 2025 (sem alteração)
-```
-
-**Resultado:** margem bruta tende a ser **ligeiramente maior em 2026** do que em 2025. Isso é importante para não confundir melhoria de margem com eficiência operacional — é apenas efeito de preço.
+**Resultado:** margem bruta tende a ser **ligeiramente maior em 2026** do que em 2025. Isso é importante para não confundir melhoria de margem com eficiência operacional — é apenas efeito de reajuste de preço, não de redução de custos ou melhora operacional.
 
 ---
 
@@ -471,19 +376,16 @@ Custo 2026 = Custo 2025 (sem alteração)
 
 ## 10. Desafios Técnicos e Soluções
 
-Durante o desenvolvimento do dashboard, enfrentamos diversos desafios técnicos. Cada solução envolveu conceitos importantes de DAX e modelagem:
+Durante o desenvolvimento do dashboard, foi enfrentado diversos desafios técnicos. Cada solução envolveu conceitos importantes de medidas DAX e modelagem:
 
 ### 10.1 Relacionamento DateTime vs Date
 
-| Desafio | A coluna `sale_date` é `TIMESTAMP` (com hora), mas `dCalendario[Data]` é `DATE`. O relacionamento falhava silenciosamente. |
+| Desafio | A coluna `sale_date` é `TIMESTAMP` (com hora), mas `dCalendario[Data]` é `DATE`. |
 |---------|-----|
 | **Causa** | `01/07/2025 14:30:00 ≠ 01/07/2025` — tipos incompatíveis |
-| **Solução** | Criar coluna calculada `sale_date_only` extraindo somente a data |
+| **Solução** | modificar a coluna `sale_date` para somente a data |
 | **Conceito** | Tipagem de dados, integridade de relacionamentos |
 
-```dax
-sale_date_only = DATE(YEAR(sales[sale_date]), MONTH(sales[sale_date]), DAY(sales[sale_date]))
-```
 
 ---
 
@@ -503,12 +405,11 @@ Ferramentas de Coluna → Classificar por Coluna → MesNumero
 
 ### 10.3 Top 5 Vendedores — Ranking Dinâmico
 
-| Desafio | O gráfico de evolução mensal deveria mostrar apenas 5 vendedores, mas mostrava todos os 30 |
+| Desafio | O gráfico de evolução mensal deveria mostrar apenas 5 vendedores, mas acaba mostrando todos os 30 |
 |---------|-----|
-| **Causa raiz** | O `RANKX` calculava o ranking no contexto do MÊS (Eixo X), gerando um Top 5 diferente para cada mês |
+| **Causa raiz** | O `RANKX` calculava o ranking no contexto do MÊS (Eixo X), gerando um Top 5 diferente para cada mês. |
 | **Resultado** | Quase todos os vendedores apareciam (Top 5 de Jan ≠ Top 5 de Fev ≠ ...) |
-| **Solução** | Usar `ALLSELECTED(dCalendario)` dentro do `RANKX` para calcular o ranking GLOBAL |
-| **Conceito** | Contexto de filtro, `ALL` vs `ALLSELECTED`, `CALCULATE` |
+| **Solução** | Usar `ALLSELECTED(dCalendario)` dentro do `RANKX` para calcular o ranking de forma GLOBAL. |
 
 ```dax
 -- ❌ ANTES (ranking muda por mês = gráfico poluído):
@@ -539,14 +440,13 @@ RANKX(
 |---------|-----|
 | **Causa** | Cards nativos do Power BI esperam medidas. Medidas DAX retornam normalmente números. |
 | **Solução** | Técnica `ADDCOLUMNS → TOPN → MAXX` para criar tabela virtual e extrair texto |
-| **Conceito** | Tabelas virtuais, funções iteradoras, `VAR/RETURN` |
 
 ```mermaid
 flowchart LR
-    V["VALUES(employees)"] -->|"30 nomes"| AC["ADDCOLUMNS<br/>+@Receita"]
-    AC -->|"30 linhas × 2 colunas"| TN["TOPN(1)<br/>maior receita"]
-    TN -->|"1 linha"| MX["MAXX<br/>extrai o nome"]
-    MX -->|"Pedro Santos"| CARD["🏆 Card KPI"]
+    V("VALUES(employees)") -->|"30 nomes"| AC("ADDCOLUMNS<br/>+@Receita")
+    AC -->|"30 linhas × 2 colunas"| TN("TOPN(1)<br/>maior receita")
+    TN -->|"1 linha"| MX("MAXX<br/>extrai o nome")
+    MX -->|"Pedro Santos"| CARD("🏆 Card KPI")
 
     style CARD fill:#27ae60,stroke:#1e8449,color:#fff
 ```
@@ -557,7 +457,7 @@ flowchart LR
 
 | Desafio | Medidas existentes (`Media Vendas por Funcionario`) mudavam de valor em cada ponto do scatter |
 |---------|-----|
-| **Causa** | Dentro do scatter, cada ponto filtra por 1 vendedor. A medida recalculava no contexto individual. |
+| **Causa** | Dentro do scatter, cada ponto filtra por 1 vendedor. A medida recalculava no contexto individual |
 | **Solução** | Criar medidas com `ALL()` para ignorar o contexto do visual e manter valor fixo |
 | **Conceito** | `ALL` como modificador de filtro dentro de `AVERAGEX`, medidas para linhas de referência |
 
@@ -571,44 +471,34 @@ Media Global Num Vendas = AVERAGEX(ALL(employees[full_name]), [Num Vendas])
 
 ---
 
-### 10.6 Card Duplicado — Quantidade de Lojas
-
-| Desafio | Dois cards mostrando "Quantidade de Lojas = 10" (informação repetida) |
-|---------|-----|
-| **Solução** | Substituir um por `Concentracao Top Estado %` — métrica de risco geográfico |
-| **Conceito** | Análise de concentração, pensamento estratégico, `MAXX + ALL + DIVIDE` |
-
-> Essa decisão demonstra **maturidade analítica**: em vez de repetir um dado, criar uma métrica que gera **insight acionável**.
-
----
-
 ### Resumo dos Conceitos Aprendidos
 
 ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#ab73f3", "primaryTextColor": "#ffffff", "cScale0": "#8e44ad", "cScale1": "#f39c12", "cScale2": "#9b59b6", "cScale3": "#27ae60", "cScale4": "#3498db", "cScale5": "#e74c3c"}}}%%
 mindmap
-  root((DAX<br/>Avançado))
-    Contexto de Filtro
-      ALL - remove tudo
-      ALLSELECTED - remove interno
-      CALCULATE - modifica contexto
-    Tabelas Virtuais
-      ADDCOLUMNS
-      VALUES
-      TOPN
-      SUMMARIZE
-    Iteradores
-      SUMX
-      AVERAGEX
-      MAXX
-      RANKX
-    Time Intelligence
-      SAMEPERIODLASTYEAR
-      DATESYTD
-      DATESMTD
-    Formatação
-      SWITCH + FORMAT
-      IF + BLANK
-      Formatação Condicional
+    root((DAX<br/>Avançado))
+        Contexto de Filtro
+            ALL - remove tudo
+            ALLSELECTED - remove interno
+            CALCULATE - modifica contexto
+        Tabelas Virtuais
+            ADDCOLUMNS
+            VALUES
+            TOPN
+            SUMMARIZE
+        Iteradores
+            SUMX
+            AVERAGEX
+            MAXX
+            RANKX
+        Time Intelligence
+            SAMEPERIODLASTYEAR
+            DATESYTD
+            DATESMTD
+        Formatação
+            SWITCH + FORMAT
+            IF + BLANK
+            Formatação Condicional
 ```
 
 ---
