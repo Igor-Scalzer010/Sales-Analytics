@@ -8,56 +8,19 @@
 
 ## Índice
 
-```mermaid
-flowchart LR
-  %% Nó Central
-  Root(("📑 Índice Navegação"))
-
-  %% Grupos Lógicos
-  G1["💡 Introdução"]
-  G2["⚙️ Engenharia"]
-  G3["📊 Business Intelligence"]
-  G4["🚀 Prática e Guias"]
-
-  %% Itens do Índice
-  I1["<a href='#1-visão-geral-do-projeto'>1. Visão Geral do Projeto</a>"]
-  I2["<a href='#2-screenshots-do-dashboard'>2. Screenshots do Dashboard</a>"]
-  I3["<a href='#3-arquitetura-e-tecnologias'>3. Arquitetura e Tecnologias</a>"]
-  I4["<a href='#4-estrutura-do-repositório'>4. Estrutura do Repositório</a>"]
-  I5["<a href='#5-modelagem-de-dados'>5. Modelagem de Dados</a>"]
-  I6["<a href='#6-estrutura-do-dashboard'>6. Estrutura do Dashboard</a>"]
-  I7["<a href='#7-principais-métricas-e-kpis'>7. Principais Métricas e KPIs</a>"]
-  I8["<a href='#8-como-reproduzir-o-projeto'>8. Como Reproduzir o Projeto</a>"]
-  I9["<a href='#9-documentação-adicional'>9. Documentação Adicional</a>"]
-
-  %% Conexões
-  Root --> G1
-  Root --> G2
-  Root --> G3
-  Root --> G4
-
-  G1 --> I1
-  G1 --> I2
-  
-  G2 --> I3
-  G2 --> I4
-  G2 --> I5
-  
-  G3 --> I6
-  G3 --> I7
-  
-  G4 --> I8
-  G4 --> I9
-
-  %% Estilização Elegante
-  classDef root fill:#0F172A,stroke:#F59E0B,stroke-width:3px,color:#FFFFFF,font-weight:bold;
-  classDef group fill:#1E293B,stroke:#3B82F6,stroke-width:2px,color:#93C5FD,font-weight:bold,rx:8,ry:8;
-  classDef item fill:#F8FAFC,stroke:#CBD5E1,stroke-width:2px,color:#334155,rx:5,ry:5,cursor:pointer;
-
-  class Root root;
-  class G1,G2,G3,G4 group;
-  class I1,I2,I3,I4,I5,I6,I7,I8,I9 item;
-```
+- **💡 Introdução**
+  - [1. Visão Geral do Projeto](#1-visão-geral-do-projeto)
+  - [2. Screenshots do Dashboard](#2-screenshots-do-dashboard)
+- **⚙️ Engenharia**
+  - [3. Arquitetura e Tecnologias](#3-arquitetura-e-tecnologias)
+  - [4. Estrutura do Repositório](#4-estrutura-do-repositório)
+  - [5. Modelagem de Dados](#5-modelagem-de-dados)
+- **📊 Business Intelligence**
+  - [6. Estrutura do Dashboard](#6-estrutura-do-dashboard)
+  - [7. Principais Métricas e KPIs](#7-principais-métricas-e-kpis)
+- **🚀 Prática e Guias**
+  - [8. Como Reproduzir o Projeto](#8-como-reproduzir-o-projeto)
+  - [9. Documentação Adicional](#9-documentação-adicional)
 
 ---
 
