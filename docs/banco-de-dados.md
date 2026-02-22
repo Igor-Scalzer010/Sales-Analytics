@@ -174,7 +174,7 @@ Tabela de categorias de produtos. Todas as 8 categorias pertencem ao segmento de
 
 ### 3.2 `stores`
 
-Filiais da empresa. Cobrem as 5 regiões geográficas do Brasil, ponderadas pelo PIB regional.
+As filiais da empresa cobrem as 5 regiões geográficas do Brasil.
 
 | Coluna   | Tipo           | Restrições   | Descrição                                          |
 |----------|----------------|--------------|----------------------------------------------------|
@@ -185,18 +185,18 @@ Filiais da empresa. Cobrem as 5 regiões geográficas do Brasil, ponderadas pelo
 
 **Filiais cadastradas:**
 
-| id | Nome                     | UF | Região        | % Vendas (peso PIB) |
-|----|--------------------------|:--:|---------------|:--------------------:|
-| 1  | Filial Centro SP         | SP | Sudeste       | ~15%                 |
-| 2  | Filial Shopping RJ       | RJ | Sudeste       | ~15%                 |
-| 3  | Filial Savassi BH        | MG | Sudeste       | ~15%                 |
-| 4  | Filial Batel Curitiba    | PR | Sul           | ~9%                  |
-| 5  | Filial Moinhos POA       | RS | Sul           | ~8%                  |
-| 6  | Filial Recife            | PE | Nordeste      | ~8%                  |
-| 7  | Filial Salvador          | BA | Nordeste      | ~8%                  |
-| 8  | Filial Brasília          | DF | Centro-Oeste  | ~7%                  |
-| 9  | Filial Goiânia           | GO | Centro-Oeste  | ~7%                  |
-| 10 | Filial Manaus            | AM | Norte         | ~7%                  |
+| id | Nome                     | UF | Região        |
+|----|--------------------------|:--:|---------------|
+| 1  | Filial Centro SP         | SP | Sudeste       |
+| 2  | Filial Shopping RJ       | RJ | Sudeste       |
+| 3  | Filial Savassi BH        | MG | Sudeste       |
+| 4  | Filial Batel Curitiba    | PR | Sul           |
+| 5  | Filial Moinhos POA       | RS | Sul           |
+| 6  | Filial Recife            | PE | Nordeste      |
+| 7  | Filial Salvador          | BA | Nordeste      |
+| 8  | Filial Brasília          | DF | Centro-Oeste  |
+| 9  | Filial Goiânia           | GO | Centro-Oeste  |
+| 10 | Filial Manaus            | AM | Norte         |
 
 ---
 
@@ -218,7 +218,7 @@ Filiais da empresa. Cobrem as 5 regiões geográficas do Brasil, ponderadas pelo
 | Cargo       | Quantidade | % do total | Papel no Negócio                          |
 |-------------|:----------:|:----------:|-------------------------------------------|
 | Vendedor    | 20         | 66,7%      | Linha de frente — principal gerador de receita |
-| Gerente     | 7          | 23,3%      | Gestão da loja, pode realizar vendas      |
+| Gerente     | 7          | 23,3%      | Gestão da loja, mas pode realizar vendas      |
 | Supervisor  | 3          | 10,0%      | Supervisiona múltiplas frentes            |
 
 > Cada loja possui exatamente **3 funcionários**. O `employee_id` de uma venda é sempre da mesma loja (`store_id`) que originou a venda — garantindo integridade lógica.
@@ -237,7 +237,7 @@ Filiais da empresa. Cobrem as 5 regiões geográficas do Brasil, ponderadas pelo
 | `unit_price`  | `NUMERIC(10,2)` | `NOT NULL`                        | Preço de tabela (venda)               |
 | `cost_price`  | `NUMERIC(10,2)` | `NOT NULL`                        | Custo de aquisição                    |
 
-> **Por que `NUMERIC(10,2)` e não `FLOAT`?** Valores monetários NUNCA devem usar `FLOAT`/`DOUBLE` porque esses tipos têm erros de arredondamento (ex: `0.1 + 0.2 = 0.30000000000000004`). `NUMERIC` garante precisão exata. Essa é uma pergunta clássica de entrevista.
+> **Por que `NUMERIC(10,2)` e não `FLOAT`?** Valores monetários NUNCA devem usar `FLOAT`/`DOUBLE` porque esses tipos têm erros de arredondamento (ex: `0.1 + 0.2 = 0.30000000000000004`). `NUMERIC` garante precisão exata.
 
 **Destaques — Produtos com maior e menor margem:**
 
@@ -277,20 +277,20 @@ Tabela fato central. Cada linha representa uma transação de venda completa.
 
 | Valor            | Descrição         | Participação | Observação                           |
 |------------------|-------------------|:------------:|--------------------------------------|
-| `pix`            | PIX               | ~35%         | Dominante em compras digitais        |
-| `cartao_credito` | Cartão de Crédito | ~30%         | Parcelamento em alto ticket          |
-| `cartao_debito`  | Cartão de Débito  | ~15%         | Compras presenciais menores          |
-| `boleto`         | Boleto Bancário   | ~12%         | Compras B2B e sem cartão             |
+| `pix`            | PIX               | ~40%         | Dominante em compras digitais        |
+| `cartao_credito` | Cartão de Crédito | ~28%         | Parcelamento em alto ticket          |
+| `cartao_debito`  | Cartão de Débito  | ~13%         | Compras presenciais menores          |
+| `boleto`         | Boleto Bancário   | ~11%         | Compras B2B e sem cartão             |
 | `dinheiro`       | Dinheiro          | ~8%          | **Exclusivo de `loja_fisica`**       |
 
 **Valores válidos — `sales_channel`:**
 
 | Valor         | Descrição   | 2025  | 2026  | Tendência |
 |---------------|-------------|:-----:|:-----:|:---------:|
-| `loja_fisica` | Loja Física | 42%   | 35%   | ↓ -7 p.p. |
-| `site`        | Site        | 26%   | 30%   | ↑ +4 p.p. |
-| `marketplace` | Marketplace | 16%   | 20%   | ↑ +4 p.p. |
-| `whatsapp`    | WhatsApp    | 16%   | 15%   | → estável  |
+| `loja_fisica` | Loja Física | 41%   | 38%   | ↓ -3 p.p. |
+| `site`        | Site        | 25%   | 29%   | ↑ +4 p.p. |
+| `marketplace` | Marketplace | 16%   | 19%   | ↑ +3 p.p. |
+| `whatsapp`    | WhatsApp    | 18%   | 14%   | → -4 p.p  |
 
 > A migração do canal físico para digital entre 2025 e 2026 é **intencional** e representa a tendência de mercado de eletroeletrônicos no Brasil.
 
@@ -358,7 +358,7 @@ CREATE INDEX idx_sales_store    ON sales(store_id);
 | `idx_sales_product`  | `product_id`   | B-Tree     | JOIN com `products` e filtros por produto       |
 | `idx_sales_store`    | `store_id`     | B-Tree     | JOIN com `stores` e filtros por filial/região   |
 
-> **Por que índices?** Com 1.000 linhas o impacto é mínimo, mas em produção (milhões de linhas) a diferença é enorme. Criar índices em FKs da tabela fato é uma **boa prática** que demonstra maturidade técnica.
+> **Por que índices?** Com 1.000 linhas o impacto é mínimo, mas em produção (milhões de linhas) a diferença é enorme. Criar índices em FKs da tabela fato é uma **boa prática** para melhorar o desempenho de consultas.
 
 ---
 
@@ -368,25 +368,45 @@ CREATE INDEX idx_sales_store    ON sales(store_id);
 
 ```mermaid
 pie title Distribuição de Vendas por Região
-    "Sudeste (SP, RJ, MG)" : 45
-    "Sul (PR, RS)" : 17
-    "Nordeste (PE, BA)" : 16
-    "Centro-Oeste (DF, GO)" : 14
+    "Sudeste (SP, RJ, MG)" : 42
+    "Sul (PR, RS)" : 18
+    "Nordeste (PE, BA)" : 18
+    "Centro-Oeste (DF, GO)" : 15
     "Norte (AM)" : 8
 ```
 
 ### Distribuição de Canais de Venda (2025 vs 2026)
 
 ```mermaid
-xychart-beta
-    title "Evolução dos Canais de Venda (%)"
-    x-axis ["Loja Física", "Site", "Marketplace", "WhatsApp"]
-    y-axis "Participação (%)" 0 --> 50
-    bar [42, 26, 16, 16]
-    bar [35, 30, 20, 15]
-```
+flowchart LR
+    subgraph "📊 2025"
+        LF1["🏪 Loja Física<br/>46%"]
+        S1["🌐 Site<br/>21%"]
+        M1["📦 Marketplace<br/>17%"]
+        W1["📱 WhatsApp<br/>15%"]
+    end
 
-> 🟦 = 2025 | 🟧 = 2026
+    subgraph "📊 2026"
+        LF2["🏪 Loja Física<br/>36%"]
+        S2["🌐 Site<br/>33%"]
+        M2["📦 Marketplace<br/>18%"]
+        W2["📱 WhatsApp<br/>13%"]
+    end
+
+    LF1 -->|"🔴 -10 p.p."| LF2
+    S1 -->|"🟢 +12 p.p."| S2
+    M1 -->|"🟢 +1 p.p."| M2
+    W1 -->|"🟡 -2 p.p."| W2
+
+    style LF1 fill:#3498db,stroke:#2980b9,color:#fff
+    style S1 fill:#3498db,stroke:#2980b9,color:#fff
+    style M1 fill:#3498db,stroke:#2980b9,color:#fff
+    style W1 fill:#3498db,stroke:#2980b9,color:#fff
+    style LF2 fill:#e74c3c,stroke:#c0392b,color:#fff
+    style S2 fill:#27ae60,stroke:#1e8449,color:#fff
+    style M2 fill:#27ae60,stroke:#1e8449,color:#fff
+    style W2 fill:#f39c12,stroke:#e67e22,color:#fff
+```
 
 ---
 
@@ -398,7 +418,7 @@ O script `03_seed_sales_v2.sql` utiliza um **bloco PL/pgSQL** com lógica probab
 
 ```mermaid
 xychart-beta
-    title "Peso de Vendas por Mês (%)"
+    title "Peso de Vendas por Mês (2025/2026)"
     x-axis ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"]
     y-axis "Peso (%)" 0 --> 15
     bar [6, 6, 7, 7, 8, 8, 8, 8, 8, 8, 13, 13]
@@ -419,57 +439,29 @@ xychart-beta
 | Novembro  | 13%  | **Black Friday**     |
 | Dezembro  | 13%  | **Natal**            |
 
-### 6.2 Distribuição de Descontos
-
-| Período                  | Sem desconto | Moderado (2–8%) | Agressivo (8–15%) |
-|--------------------------|:------------:|:---------------:|:------------------:|
-| **Black Friday / Natal** | 25%          | 25%             | 50%                |
-| **Datas comemorativas**  | 40%          | 35%             | 25%                |
-| **Meses normais**        | 55%          | 30%             | 15%                |
-
-### 6.3 Quantidade por Faixa de Preço
-
-| Faixa de Preço    | Quantidade por Transação | Justificativa                    |
-|-------------------|:------------------------:|----------------------------------|
-| Acima de R$ 3.000 | 1 (sempre)               | Alto ticket = compra unitária    |
-| R$ 500 – R$ 3.000 | 1 a 2                    | Ticket médio                     |
-| R$ 100 – R$ 500   | 1 a 3                    | Ticket baixo                     |
-| Abaixo de R$ 100  | 1 a 5                    | Acessórios (compra múltipla)     |
-
-### 6.4 Reajuste de Preços 2026
-
-```
-Preço 2026 = Preço 2025 × (1 + inflação)
-Onde inflação = aleatório entre +4% e +6%
-```
-
-- O custo (`cost_price`) **não é reajustado** → margem bruta tende a ser ligeiramente maior em 2026
-- Isso é importante para interpretar o crescimento YoY: parte é **volume real** e parte é **inflação**
-
 ---
 
 ## 7. Transformações no Power Query (ETL)
 
 Transformações aplicadas no Power Query Editor após carregar as tabelas do PostgreSQL:
 
-| Tabela        | Transformação                                                              |
+| Tabela        | Transformação                                                             |
 |---------------|---------------------------------------------------------------------------|
-| `sales`       | Coluna `sale_date`: tipo alterado para `Data/Hora` (sem fuso)             |
-| `sales`       | Nova coluna `sale_date_only`: extrair somente Data (sem horário)          |
+| `sales`       | coluna `sale_date`: extrair somente Data (sem horário)                    |
 | `sales`       | Formatação de colunas de data para `dd/MM/yyyy`                           |
 | `employees`   | Confirmar `birth_date` e `hire_date` como tipo `Data`                     |
 | `dCalendario` | Criada via Power Query (M) com 10 colunas derivadas                       |
 | `dCalendario` | `MesAbrev` classificado por `MesNumero` (evitar ordenação alfabética)     |
 | Todas         | Confirmar IDs e FKs como `Número Inteiro`                                 |
 
-### Decisão técnica: `sale_date` vs `sale_date_only`
+### Decisão técnica: `sale_date`
 
-| Coluna            | Tipo       | Exemplo                    | Uso                           |
-|-------------------|------------|----------------------------|-------------------------------|
-| `sale_date`       | DateTime   | 01/07/2025 14:30:00        | Análises com hora (se necessário) |
-| `sale_date_only`  | Date       | 01/07/2025                 | **Relacionamento com `dCalendario`** |
+| Coluna                    | Tipo       | Exemplo                    | Uso                                  |
+|---------------------------|------------|----------------------------|--------------------------------------|
+| `sale_date` (antes)       | DateTime   | 01/07/2025 14:30:00        | Análises com hora (antes)            |
+| `sale_date`  (depois)     | Date       | 01/07/2025                 | **Relacionamento com `dCalendario`** |
 
-> A coluna `sale_date_only` foi criada porque `DateTime ≠ Date` no Power BI. O valor `01/07/2025 14:30` **não é igual** a `01/07/2025`, então o relacionamento falharia sem a extração.
+> A coluna `sale_date` foi modificada porque `DateTime ≠ Date` no Power BI. O valor `01/07/2025 14:30` **não é igual** a `01/07/2025`, então o relacionamento falharia sem a extração.
 
 ---
 
@@ -479,7 +471,7 @@ Todos os relacionamentos configurados no modo **Vista do Modelo**:
 
 | De (Dimensão) | Coluna        | Para (Fato/Dim) | Coluna           | Tipo | Filtro |
 |----------------|---------------|------------------|------------------|:----:|:------:|
-| `dCalendario`  | `Data`        | `sales`          | `sale_date_only` | 1:N  | Único  |
+| `dCalendario`  | `Data`        | `sales`          | `sale_date`      | 1:N  | Único  |
 | `categories`   | `id`          | `products`       | `category_id`    | 1:N  | Único  |
 | `products`     | `id`          | `sales`          | `product_id`     | 1:N  | Único  |
 | `employees`    | `id`          | `sales`          | `employee_id`    | 1:N  | Único  |
@@ -487,12 +479,13 @@ Todos os relacionamentos configurados no modo **Vista do Modelo**:
 
 ### Por que "Filtro Único" e não "Ambos"?
 
-| Critério          | Único ✅                    | Ambos ⚠️                     |
-|-------------------|-----------------------------|-------------------------------|
-| **Performance**   | Mais rápido                 | Mais lento (mais cálculos)    |
+| Critério            | Único ✅                          | Ambos ⚠️                          |
+|---------------------|------------------------------------|-----------------------------------|
+| **Performance**     | Mais rápido                        | Mais lento (mais cálculos)        |
 | **Previsibilidade** | Filtros se comportam como esperado | Pode gerar resultados inesperados |
-| **Ambiguidade**   | Não há                      | Pode criar caminhos circulares |
-| **Boas práticas** | Padrão Star Schema          | Apenas em casos muito específicos |
+| **Ambiguidade**     | Não há                             | Pode criar caminhos circulares    |
+| **Boas práticas**   | Padrão Star Schema                 | Apenas em casos muito específicos |
+
 
 ---
 
